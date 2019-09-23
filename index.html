@@ -18,22 +18,32 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <h1>HANGMAN!</h1>
+            <div></div>
         </div>
         <div class="col-md-4"></div>
     </div>
-
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+    
+    <div class="container">
+        <div class="dropdown" id="themeSelector">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Choose a theme to start playing
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" id="lotr" value="lotr">Lord Of The Rings</a>
+                <a class="dropdown-item" id="star-wars" value="star-wars">Star Wars</a>
+            </div>
         </div>
-    </div>
 
+        <section id="game" class="row">
+            <div class="col-md-12 col-lg-12">
+                <h3><span id="randomWord"></span></h3>
+                <h3>Letters guessed: <span id="guessedLetters"></span></h3>
+                <h3>Wins: <span id="wins">0</span></h3>
+                <h3>Remaining attempts: <span id="remaining">0</span></h3>
+            </div>        
+        </section>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -43,8 +53,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="resources/javascript/game.js">
-    </script>
+    <script src="resources/javascript/game.js"></script>
 </body>
 
 </html>
