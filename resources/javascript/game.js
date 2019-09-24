@@ -3,7 +3,7 @@ var validChars = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 var tempWord = "";
 var workingWord = "";
 var guessedArray = [];
-var lives = 0;
+var lives = 10;
 var wins = 0;
 var lotrTheme = document.getElementById("lotr");
 var swTheme = document.getElementById("star-wars");
@@ -11,6 +11,7 @@ var winText = document.getElementById("wins");
 var guessedChars = document.getElementById("guessedLetters");
 var remainingAttempts = document.getElementById("remaining");
 var randomWord = document.getElementById("randomWord");
+var body = document.getElementById("body");
 
 var themes = {
     lotr : { 
@@ -42,18 +43,42 @@ function chooseRandomWord(theme){
 }
 
 function play(char){
-    if(wordToGuess.indexOf(char)){
-        for(var i = 0; i < tempWord.length; i++){
-            if(wordToGuess[i] === char){
-                workingWord[i] = char;
-                console.log(wordToGuess.length, tempWord.length);
-                console.log(i + ":" + wordToGuess + ":" + tempWord);
-            }else{
-                workingWord[i] = tempWord[i];
+        if(wordToGuess.indexOf(char) != -1){
+            for(var i = 0; i < tempWord.length; i++){
+                if(wordToGuess[i] === char){
+                    workingWord += char;
+                }else{
+                    workingWord += tempWord[i];
+                }
             }
-            console.log(workingWord);
+            tempWord = workingWord;
+            workingWord = "";
+            randomWord.textContent = tempWord;
+            
+            if(tempWord.indexOf("_") === -1){
+                var result = confirm("YOU WIN! Do you want to play again?");
+                if(result){
+                    wins += 1;
+                    winText.textContent = wins;
+                    reloadGame();
+                }else{
+                    window.location.replace("https://www.google.com");
+                }
+            }
+        }else{
+            lives -= 1;
+            if(lives === 0 ){
+                var result = confirm("YOU LOST! Do you want to play again?");
+                if(result){
+                    location.reload();
+                }else{
+                    window.location.replace("https://www.google.com");
+                }
+            }
+            workingWord = "";
+            randomWord.textContent = tempWord;
+            remainingAttempts.textContent = lives;
         }
-    }
 }
 
 document.onkeyup = function(event){
@@ -66,15 +91,32 @@ document.onkeyup = function(event){
 }
 
 lotrTheme.onclick = function(event){
+    reloadGame();
     randomWord.textContent = "";
     wordToGuess = "";
     wordToGuess = chooseRandomWord("lotr");
     randomWord.textContent = createTempWord(wordToGuess);
+    remainingAttempts.textContent = lives;
+    body.setAttribute("class","lotr");
 }
 
-swTheme.onclick = function(event){
+swTheme.onclick = function(event){  
+    reloadGame();
     wordToGuess = "";
     randomWord.textContent = wordToGuess;
     wordToGuess = chooseRandomWord("star-wars");
     randomWord.textContent = createTempWord(wordToGuess);
+    remainingAttempts.textContent = lives;
+    body.setAttribute("class","star-wars");
+}
+
+function reloadGame(){
+    tempWord = "";
+    workingWord = "";
+    wordToGuess = "";
+    lives = 10;
+    guessedArray = [];
+    remainingAttempts.textContent = lives;
+    guessedChars.textContent = guessedArray;
+    randomWord.textContent = tempWord;
 }

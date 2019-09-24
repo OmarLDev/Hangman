@@ -1,4 +1,14 @@
-body{
+/* body{
     background-color: #000;
+    color: #fff;
+} */
+
+.lotr{
+    background-color: #008000;
+    color: gold;
+}
+
+.star-wars{
+    background-color:#000;
     color: #fff;
 }
